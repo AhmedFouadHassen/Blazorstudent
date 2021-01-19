@@ -1,0 +1,59 @@
+﻿@page "/"
+@inject Istudent studentss
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                رقم الطالب
+            </th>
+            <th>
+                اسم الطالب
+            </th>
+            <th>
+                عمر الطالب
+            </th>
+            <th>
+                بلد الطالب
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in students)
+        {
+            <tr>
+                <td>
+                    @item.StudentID
+                </td>
+                <td>
+                    @item.StudentName
+                </td>
+                <td>
+                    @item.StudentAge
+                </td>
+                <td>
+                    @item.StudenAddress
+                </td>
+                <td>
+                 
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code
+{
+    protected override async Task OnInitializedAsync()
+    {
+        students = await studentss.getasyns;
+    }
+    private IEnumerable<Student> students ;
+
+
+
+
+
+
+}

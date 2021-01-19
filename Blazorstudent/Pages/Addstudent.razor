@@ -1,0 +1,84 @@
+﻿@page "/addstudent"
+@inject Istudent studentss
+@inject NavigationManager NavManager
+<h3>اضافة طالب</h3>
+<EditForm Model="@Student" >
+
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="form-group">
+
+        <label>رقم الطالب</label>
+        <input name="StudentID" @bind-value="Student.StudentID" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>اسم الطالب</label>
+        <input name="StudentName" @bind-value="Student.StudentName" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>عمر الطالب</label>
+        <input name="StudentAge" @bind-value="Student.StudentAge" class="form-control" />
+        <ValidationMessage For="@(() => Student.StudentAge)" />
+    </div>
+    <div class="form-group">
+        <label>عنوان الطالب</label>
+        <input name="StudenAddress" @bind-value="Student.StudenAddress" class="form-control" />
+    </div>
+    <button class="btn btn-primary" @onclick="addstudentss">Click me</button>
+</EditForm>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                رقم الطالب
+            </th>
+            <th>
+                اسم الطالب
+            </th>
+            <th>
+                عمر الطالب
+            </th>
+            <th>
+                بلد الطالب
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in students)
+        {
+            <tr>
+                <td>
+                    @item.StudentID
+                </td>
+                <td>
+                    @item.StudentName
+                </td>
+                <td>
+                    @item.StudentAge
+                </td>
+                <td>
+                    @item.StudenAddress
+                </td>
+                <td>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@code {
+    private Student Student = new Student();
+    private async Task addstudentss()
+    {
+
+        studentss.addstudent(Student);
+       
+
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        students = await studentss.getasyns;
+    }
+    private IEnumerable<Student> students;
+
+}
